@@ -1,19 +1,26 @@
 function getLower(){
-  return String.fromCharCode(Math.floor(Math.random() * 26)+ 97);
+    return String.fromCharCode(Math.floor(Math.random() * 26)+ 97);
+   
 }
 
 function getUpper(){
   return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+  
 }
 
 function getRandomNumber() {
   return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+ 
 }
 
 function getRandomSymbol() {
   const symbols = '!@#$%^&*(){}[]=/,.-+|';
   return symbols[Math.floor(Math.random() * symbols.length)];
+  
 }
+
+
+// functions for getting prompt start here
 
 
 var length = function (){
@@ -32,30 +39,67 @@ if (passLength > 8 && passLength < 128 ) {
 }
 
 var includeUpperCase = function () {
-  var includeUpperCase = window.prompt("Do you want Capital Letters? Press 1 for Yes or 2 for No");
-  includeUpperCase = parseInt(includeUpperCase)
-  if (includeUpperCase === 1) {
+  var includeUpperCasePrompt = window.prompt("Do you want Capital Letters? Press 1 for Yes or 2 for No");
+  includeUpperCasePrompt = parseInt(includeUpperCasePrompt)
+  if (includeUpperCasePrompt === 1) {
     console.log(getUpper());
+    includeUpperCasePrompt = true;
   } else {
-    includeUpperCase = false;
+    includeUpperCasePrompt = false;
     console.log('false');
 
 }
 }
-
-
 
 var includeLowerCase = function () {
-  var includeLowercase = window.prompt("Do you lower case Letters? 1 for Yes or 2 for No");
-  includeLowercase = parseInt(includeLowercase)
-  if (includeLowercase === 1) {
+  var includeLowercasePrompt = window.prompt("Do you lower case Letters? 1 for Yes or 2 for No");
+  includeLowercasePrompt = parseInt(includeLowercasePrompt)
+  if (includeLowercasePrompt === 1) {
     console.log(getLower());
   } else {
-    includeLowercase = false;
+    includeLowercasePrompt = false;
     console.log('false');
 
 }
 }
+
+var includeSymbols = function () {
+  var includeSymbolsPrompt = window.confirm("Do you want to include symbols?  1 for Yes or 2 No");
+  includeSymbolsPrompt = parseInt(includeSymbolsPrompt);
+  if (includeSymbolsPrompt === 1) {
+    console.log(getRandomSymbol()); 
+    includeSymbolsPrompt = true;
+  } else {
+    includeSymbolsPrompt = false;
+    console.log('false');
+  }
+  }
+  
+  var symbols = function () {
+    var symbolsPrompt = window.prompt("Do you want numbers? Press 1 for Yes or 2 for No");
+    symbolsPrompt = parseInt(symbolsPrompt);
+    if (symbolsPrompt === 1) {
+      console.log(getRandomSymbol());
+    } else {
+      symbolsPrompt = false;
+      console.log('false');
+    }
+    }
+
+
+
+var includeRandomNumber = function () {
+  var includeRandomNumberPrompt = window.prompt("Do you want numbers? Press 1 for Yes or 2 for No");
+  includeRandomNumberPrompt = parseInt(includeRandomNumberPrompt);
+  if (includeRandomNumberPrompt === 1) {
+    console.log(getRandomNumber());
+  } else {
+    includeRandomNumberPrompt = false;
+    console.log('false');
+  }
+  }
+
+
 // Assignment code here
 
 
@@ -71,40 +115,15 @@ document.getElementById("generate")
         } 
      
         length();
-
-        includeLowerCase();
-  
+        
         includeUpperCase();
 
+        includeLowerCase();
 
-
-    var includeLowercase = window.prompt("Do you lower case Letters?  Yes or No");
-    if (includeLowercase === "yes" || "YES") {
-      includeLowercase = true;
-      console.log('true');
-    } else {
-      includeLowercase = false;
-      console.log('false');
-    }
-    
-    var includeNumbers = window.prompt("Do you want to include numbers?  Yes or No");
-    if (includeNumbers === "yes" || "YES") {
-      includeUppercase = true;
-      console.log('true');
-    } else {
-      includeUppercase = false;
-      console.log('false');
-    }
+        symbols();
   
-
-    var includeSymbols = window.confirm("Do you want to include symbols?  Yes or No");
-    if (includeSymbols === "yes" || "YES") {
-      includeSymbols = true;
-      console.log('true');
-    } else {
-      includeSymbols = false;
-      console.log('false');
-    }
+        includeRandomNumber();
+    
 });
 
 var getFunctions = {
@@ -114,8 +133,11 @@ var getFunctions = {
   symbol: getRandomSymbol,
 }
 
-
-
+// var lower = getLower;
+// var upper = includeUpperCasePrompt;
+// var number = getRandomNumber;
+// var symbol = includeSymbolsPrompt;
+console.log()
 
 
 console.log(getLower());
@@ -128,14 +150,8 @@ console.log(getRandomSymbol());
  
 
 
-    
-    
 
-  
-
-
-
-function generatePassword (lower, upper, number, symbol, length){
+function generatePassword (lower, upper, number, symbol){
  
   var generatedPassword = '';
   
@@ -143,28 +159,29 @@ function generatePassword (lower, upper, number, symbol, length){
 
   console.log('typesCount: ', typesCount);
 
-  const typesArr = [{lower},]
+  const typesArr = [getLower, getUpper, number, symbol];
+  console.log('typesArr:' , typesArr)
   
 };
 
-var length = function () {
- var lengthPrompt = window.prompt("How many numbers from 8 -128 for your password");
- passLength = parseInt(lengthPrompt, 10);
+// var length = function () {
+//  var lengthPrompt = window.prompt("How many numbers from 8 -128 for your password");
+//  passLength = parseInt(lengthPrompt, 10);
  
- if (passLength < 8 || passLength > 128 || passLength === 0 || passLength === "") {
-   window.alert("Please enter length between 8 and 128 digits.");
-  return length();
-  }
-if (passLength > 8 && passLength < 128 ) {
-  window.alert("You entered a " + passLength + " digit password.");
-  console.log(passLength);
-  }
-  var text = "";
-  var shuffle = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-for (var i=0; i < passLength; i++){
- console.log( text += shuffle.charAt(Math.floor(Math.random() * shuffle.length)));
-  }
-}
+//  if (passLength < 8 || passLength > 128 || passLength === 0 || passLength === "") {
+//    window.alert("Please enter length between 8 and 128 digits.");
+//   return length();
+//   }
+// if (passLength > 8 && passLength < 128 ) {
+//   window.alert("You entered a " + passLength + " digit password.");
+//   console.log(passLength);
+//   }
+//   var text = "";
+//   var shuffle = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+// for (var i=0; i < passLength; i++){
+//  console.log( text += shuffle.charAt(Math.floor(Math.random() * shuffle.length)));
+//   }
+// }
 
 
 
