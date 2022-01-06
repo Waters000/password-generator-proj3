@@ -29,6 +29,8 @@ get.addEventListener("click", function(  ){
 
 // Start function to generate password
 function generatePassword() {
+ window.confirm("Welcome to password generator");
+
   // Asks for user input
   length = parseInt(prompt("How many characters would you like your password? Choose between 8 and 128"));
   // First if statement for user validation 
@@ -38,14 +40,22 @@ function generatePassword() {
       // Validates user input
       // Start user input prompts
       length = parseInt(prompt("You must choose between 8 and 128"));
-
+      return generatePassword();
   } else {
       // Continues once user input is validated
-      confirmNumber = confirm("Will this contain numbers?");
-      confirmSymbol = confirm("Will this contain special characters?");
-      confirmUpper = confirm("Will this contain Uppercase letters?");
-      confirmLower = confirm("Will this contain Lowercase letters?");
+      confirmAlert = window.confirm("you choose a paswword with " + length + " digits...is this correct");
+
+      if (!confirmAlert) {
+        window.alert("Restarting password generator");
+        return generatePassword();
+      }
+      confirmNumber = window.confirm("Will this contain numbers?...Confirm for Yes, Cancel for No.");
+      confirmSymbol = window.confirm("Will this contain special characters?...Confirm for Yes, Cancel for No.");
+      confirmUpper = window.confirm("Will this contain Uppercase letters?...Confirm for Yes, Cancel for No.");
+      confirmLower = window.confirm("Will this contain Lowercase letters?...Confirm for Yes, Cancel for No.");
   };
+
+ 
 
   // Else if for 4 negative options
   if (!confirmSymbol && !confirmNumber && !confirmUpper && !confirmLower) {
@@ -103,7 +113,7 @@ function generatePassword() {
   }
   // Created space variable to fill uppercase conversion
   else if (confirmUpper) {
-      choices = space.concat(alpha2);
+      choices = space.concat(letterUp);
   };
 
   // password variable is an array placeholder for user generated amount of length
@@ -128,233 +138,3 @@ function UserInput(ps) {
 
 }
 
-var copy = document.querySelector("#copy");
-copy.addEventListener("click", function () {
-  copyPassword();
-});
-
-function copyPassword() {
-  document.getElementById("password").select();
-  document.execCommand("Copy");
-  alert("Password copied to clipboard!");
-}
-
-// This copies the password value - works
-// Code example demonstrated in a youtube video: 
-// Source: https://youtu.be/9sT03jEwcaw
-
-
-///my section
-
-// function questions() {
-// var confirmCap = confirm.prompt("Would you like Capital Letters?..Confirm for yes and Cancel for no.");
-// var confrimNum = confirm.prompt("Would you like Numbers in your Password?...Confirm for Yes and Cancel for No");
-// var confrimLower = confirm.prompt("Would you like lower case letters in your Password?...Confirm for Yes and Cancel for No");
-// var confrimSymbol = confirm.prompt("Would you like Symbols in your Password?...Confirm for Yes and Cancel for No");
-// }
-
-
-
-// function getLower(){
-//    passLength = "";
-//    var text = "";
-//    var shuffle = "abcdefghijklmnopqrstuvwxyz";
-//  for (var i=0; i < passLength; i++){
-//   console.log( text += String.fromCharCode(Math.floor(Math.random() * 26)+ 97));
-//    }
-   
-// }
-
-
-// // Assignment code here
-
-
-
-
-// document.getElementById("generate")
-// .addEventListener("click", function( e ){ //e => event
-  
-
-//         if( ! confirm("Do you want set a password?") ){
-//             e.preventDefault(); // ! => don't want to do this
-//         } else if (e){
-//             //want to do this! => maybe do something about it?
-//             alert('Ok, lets select criteria for you password!');
-//         } 
-        
-//         questions();
-
-//         generatePassword();
-
-       
-
-// });
-
-
-
-
-// function generatePassword (){
-//   var charBank = "";
-  
-//   var lengthPrompt = window.prompt("How many numbers from 8 -128 for your password");
-//   passLength = parseInt(lengthPrompt, 10);
-  
-//   if (passLength < 8 || passLength > 128 || passLength === 0 || passLength === "") {
-//     window.alert("Please enter length between 8 and 128 digits.");
-//    return length();
-//    }
-//  if (passLength > 8 && passLength < 128 ) {
-//    window.alert("You entered a " + passLength + " digit password.");
-//    console.log(passLength);
-//    }
-//    var text = "";
-//    var shuffle = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//  for (var i=0; i < passLength; i++){
-//   console.log( text += shuffle.charAt(Math.floor(Math.random() * shuffle.length)));
-//    }
-
-
-//   };
-
-
-
-
-
-
-
-
-
-// // console.log(getLower());
-// // console.log(getUpper());
-// // console.log(getRandomNumber());
-// // console.log(getRandomSymbol());
-
-
-// //  passLength = parseInt(lengthPrompt, 10);
- 
-
-
-
-
-// // Get references to the #generate element
-// var generateBtn = document.querySelector("#generate");
-
-
-
-// // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-
-//   passwordText.value = password;
-
-// }
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
-
-
-
-
-// function getUpper(){
-//   return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-//   return true;
-// }
-
-// function getRandomNumber() {
-//   return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-//   return true;
-// }
-
-// function getRandomSymbol() {
-//   const symbols = '!@#$%^&*(){}[]=/,.-+|';
-//   return  symbols[Math.floor(Math.random() * symbols.length)];
-//    return true;
-// }
-
-
-// functions for getting prompt start here
-
-
-// var length = function () {
-//   var lengthPrompt = window.prompt("How many numbers from 8 -128 for your password");
-//   passLength = parseInt(lengthPrompt, 10);
-  
-//   if (passLength < 8 || passLength > 128 || passLength === 0 || passLength === "") {
-//     window.alert("Please enter length between 8 and 128 digits.");
-//    return length();
-//    }
-//  if (passLength > 8 && passLength < 128 ) {
-//    window.alert("You entered a " + passLength + " digit password.");
-//    console.log(passLength);
-//    }
-//    var text = "";
-//    var shuffle = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//  for (var i=0; i < passLength; i++){
-//   console.log( text += shuffle.charAt(Math.floor(Math.random() * shuffle.length)));
-//    }
-//  }
- 
-
-// var includeUpperCase = function () {
-//   var includeUpperCasePrompt = window.prompt("Do you want Capital Letters? Press 1 for Yes or 2 for No");
-//   includeUpperCasePrompt = parseInt(includeUpperCasePrompt)
-//   if (includeUpperCasePrompt === 1) {
-//     console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 65));
-//     upper = true;
-//   } else {
-//     includeUpperCasePrompt = false;
-//     console.log('false');
-
-// }
-// }
-
-// var includeLowerCase = function () {
-//   var includeLowercasePrompt = window.prompt("Do you lower case Letters? 1 for Yes or 2 for No");
-//   includeLowercasePrompt = parseInt(includeLowercasePrompt)
-//   if (includeLowercasePrompt === 1) {
-//     console.log(getLower());
-//     lower = true;
-//   } else {
-//     includeLowercasePrompt = false;
-//     console.log('false');
-
-// }
-// }
-
-// var includeSymbols = function () {
-//   var includeSymbolsPrompt = window.confirm("Do you want to include symbols?  1 for Yes or 2 No");
-//   includeSymbolsPrompt = parseInt(includeSymbolsPrompt);
-//   if (includeSymbolsPrompt === 1) {
-//     console.log(getRandomSymbol()); 
-//     symbol = true;
-//   } else {
-//     includeSymbolsPrompt = false;
-//     console.log('false');
-//   }
-//   }
-  
-//   var symbols = function () {
-//     var symbolsPrompt = window.prompt("Do you want numbers? Press 1 for Yes or 2 for No");
-//     symbolsPrompt = parseInt(symbolsPrompt);
-//     if (symbolsPrompt === 1) {
-//       console.log(getRandomSymbol());
-//       number = true;
-//     } else {
-//       symbolsPrompt = false;
-//       console.log('false');
-//     }
-//     }
-
-
-
-// var includeRandomNumber = function () {
-//   var includeRandomNumberPrompt = window.prompt("Do you want numbers? Press 1 for Yes or 2 for No");
-//   includeRandomNumberPrompt = parseInt(includeRandomNumberPrompt);
-//   if (includeRandomNumberPrompt === 1) {
-//     console.log(getRandomNumber());
-//   } else {
-//     includeRandomNumberPrompt = false;
-//     console.log('false');
-//   }
-//   }
