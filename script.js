@@ -1,27 +1,22 @@
 
 
 var length;
-var confirmNumber;
-var confirmUpper;
-var confirmLower;
-var confirmSymbol;
+var confirmNumber; // Number value is now blank will equal the confirm or cancel value in confirm window prompt.
+var confirmUpper;  // Upper character blank will equal the confirm or cancel value in confirm window prompt.
+var confirmLower;  // Lower character blank will equal the confirm or cancel value in confirm window prompt.
+var confirmSymbol;  // Symbols blank will equal the confirm or cancel value in confirm window prompt.
 
+var confirm; // empty but will concat the values from all confirmed values from IF Else statements.
 
 letter = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 number = ['0','1','2','3','4','5','6','7','8','9'];
 symbol = ['!','@','#','$','%','^','&','*','(',')','{','}','[',']','=','/',',','.','-','+',']'];
-space = [];
+letterUp = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
-var choices;
-
-var toUpper = function (x) {
-  return x.toUpperCase();
-};
-
-letterUp = letter.map(toUpper);
 
 var get = document.querySelector("#generate");
 
+/// click button function to get started
 get.addEventListener("click", function(  ){ 
  ps = generatePassword();
  document.getElementById("password").placeholder = ps;
@@ -49,17 +44,15 @@ function generatePassword() {
         window.alert("Restarting password generator");
         return generatePassword();
       }
-      confirmNumber = window.confirm("Will this contain numbers?...Confirm for Yes, Cancel for No.");
-      confirmSymbol = window.confirm("Will this contain special characters?...Confirm for Yes, Cancel for No.");
-      confirmUpper = window.confirm("Will this contain Uppercase letters?...Confirm for Yes, Cancel for No.");
-      confirmLower = window.confirm("Will this contain Lowercase letters?...Confirm for Yes, Cancel for No.");
+      confirmNumber = window.confirm("Would you like your password to contain numbers?...Confirm for Yes, Cancel for No.");
+      confirmSymbol = window.confirm("Would you like your password to contain special characters?...Confirm for Yes, Cancel for No.");
+      confirmUpper = window.confirm("Would you like your password to contain Uppercase letters?...Confirm for Yes, Cancel for No.");
+      confirmLower = window.confirm("Would you like your password to contain Lowercase letters?...Confirm for Yes, Cancel for No.");
   };
-
- 
 
   // Else if for 4 negative options
   if (!confirmSymbol && !confirmNumber && !confirmUpper && !confirmLower) {
-      choices = alert("You must choose a criteria!");
+    confirm = alert("You must choose a criteria!");
       return generatePassword();
 
   }
@@ -67,53 +60,67 @@ function generatePassword() {
   // Else if for 4 positive options
   else if (confirmSymbol && confirmNumber && confirmUpper && confirmLower) {
 
-      choices = symbol.concat(number, letter, letterUp);
+    confirm = symbol.concat(number, letter, letterUp);
+    console.log(confirm)
   }
   // Else if for 3 positive options
   else if (confirmSymbol && confirmNumber && confirmUpper) {
-      choices = symbol.concat(number, letterUp);
+    confirm = symbol.concat(number, letterUp);
+    console.log(confirm)
   }
   else if (confirmSymbol && confirmNumber && confirmLower) {
-      choices = symbol.concat(number, letter);
+    confirm = symbol.concat(number, letter);
+    console.log(confirm)
   }
   else if (confirmSymbol && confirmLower && confirmUpper) {
-      choices = symbol.concat(letter, letterUp);
+    confirm = symbol.concat(letter, letterUp);
+    console.log(confirm)
   }
   else if (confirmNumber && confirmLower && confirmUpper) {
-      choices = number.concat(letter, letterUp);
+    confirm = number.concat(letter, letterUp);
+    console.log(confirm)
   }
   // Else if for 2 positive options 
   else if (confirmSymbol && confirmNumber) {
-      choices = symbol.concat(number);
+    confirm = symbol.concat(number);
+    console.log(confirm)
 
   } else if (confirmSymbol && confirmLower) {
-      choices = symbol.concat(letter);
+    confirm = symbol.concat(letter);
+    console.log(confirm)
 
   } else if (confirmSymbol && confirmUpper) {
-      choices = symbol.concat(letterUp);
+    confirm = symbol.concat(letterUp);
+    console.log(confirm)
   }
   else if (confirmLower && confirmNumber) {
-      choices = letter.concat(number);
+    confirm = letter.concat(number);
+    console.log(confirm)
 
   } else if (confirmLower && confirmUpper) {
-      choices = letter.concat(letterUp);
+    confirm = letter.concat(letterUp);
+    console.log(confirm)
 
   } else if (confirmNumber && confirmUpper) {
-      choices = number.concat(letterUp);
+    confirm = number.concat(letterUp);
+    console.log(confirm)
   }
   // Else if for 1 positive option
   else if (confirmSymbol) {
-      choices = symbol;
+    confirm = symbol;
+    console.log(confirm)
   }
   else if (confirmNumber) {
-      choices = number;
+    confirm = number;
+    console.log(confirm)
   }
   else if (confirmLower) {
-      choices = letter;
+    confirm = letter;
+    console.log(confirm)
   }
   // Created space variable to fill uppercase conversion
   else if (confirmUpper) {
-      choices = space.concat(letterUp);
+    confirm = letterUp;
   };
 
   // password variable is an array placeholder for user generated amount of length
@@ -122,15 +129,18 @@ function generatePassword() {
   // Start random selection variables:
   // Random selection for all variables: 
   for (var i = 0; i < length; i++) {
-      var pickChoices = choices[Math.floor(Math.random() * choices.length)];
-      password.push(pickChoices);
+      var pickconfirm = confirm[Math.floor(Math.random() * confirm.length)];
+      password.push(pickconfirm);
   }
   // This joins the password array and converts it to a string
   // Worked with a tutor to incorporate this option
   var ps = password.join("");
   UserInput(ps);
+  console.log(ps);
   return ps;
 }
+
+
 // This puts the password value into the textbox
 // Changed function input to use textcontent
 function UserInput(ps) {
