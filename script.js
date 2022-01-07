@@ -1,4 +1,25 @@
+/*What's the Plan?  - Try for the most simple method for now.
+User clicks button - Start the generage button function 
+ window prompt for the set length with integer - set variable to length
+ confirm prompt for remainder of questions...confirmNumber, confirmUpper, confirmLower, confirmSymbol.
+ window confirmation is set to empty variable and placed as ture when confirmed.
+ 
+ User's options 1) - length, yes, yes, yes, yes.
+                2) - length, yes, yes, yes, no
+                3) - length, yes, yes, no, no
+                4) - length, yes, no, no, no
+                5) - length, no, no, no, no. (this will be excluded.)
 
+4 arrays with upper, lower, symbols and numbers
+IF confirmNumber is confirmed, make equal to number array. do same for all confirmed prompts.
+Concat each array to a confirm variable with all options for each confirmed array.
+
+Loop through the confirm variable to get random password.
+Put random password into it's own array.
+pull array out as a string with join method call ps.
+Put ps back into dom and show in html.
+
+*/
 
 var length;
 var confirmNumber; // Number value is now blank will equal the confirm or cancel value in confirm window prompt.
@@ -38,7 +59,7 @@ function generatePassword() {
       return generatePassword();
   } else {
       // Continues once user input is validated
-      confirmAlert = window.confirm("you choose a paswword with " + length + " digits...is this correct");
+      confirmAlert = window.confirm("you choose a paswword with " + length + " digits...is this correct?");
 
       if (!confirmAlert) {
         window.alert("Restarting password generator");
@@ -50,20 +71,19 @@ function generatePassword() {
       confirmLower = window.confirm("Would you like your password to contain Lowercase letters?...Confirm for Yes, Cancel for No.");
   };
 
-  // Else if for 4 negative options
+  // Option 5, all no options
   if (!confirmSymbol && !confirmNumber && !confirmUpper && !confirmLower) {
     confirm = alert("You must choose a criteria!");
       return generatePassword();
 
   }
-  // First if statement that uses user input prompts to determine choices
-  // Else if for 4 positive options
+  // User input prompts to determine user's confirm or no.
+  // Option 1, all confirmed options
   else if (confirmSymbol && confirmNumber && confirmUpper && confirmLower) {
-
     confirm = symbol.concat(number, letter, letterUp);
     console.log(confirm)
   }
-  // Else if for 3 positive options
+  // Option 2, 3 confirmed options. All options for 3 confirmed options.
   else if (confirmSymbol && confirmNumber && confirmUpper) {
     confirm = symbol.concat(number, letterUp);
     console.log(confirm)
@@ -79,8 +99,8 @@ function generatePassword() {
   else if (confirmNumber && confirmLower && confirmUpper) {
     confirm = number.concat(letter, letterUp);
     console.log(confirm)
-  }
-  // Else if for 2 positive options 
+  } 
+  // Option 3 - 2 confirmed options with all options.
   else if (confirmSymbol && confirmNumber) {
     confirm = symbol.concat(number);
     console.log(confirm)
@@ -105,7 +125,7 @@ function generatePassword() {
     confirm = number.concat(letterUp);
     console.log(confirm)
   }
-  // Else if for 1 positive option
+  // Option 4 - 1 confirmed option for each prompt.
   else if (confirmSymbol) {
     confirm = symbol;
     console.log(confirm)
@@ -123,17 +143,19 @@ function generatePassword() {
     confirm = letterUp;
   };
 
-  // password variable is an array placeholder for user generated amount of length
+  // password variable is an empty array placeholder to hold loop output for user generated amount of length
   var password = [];
 
-  // Start random selection variables:
+  // For loop to get a random password from confirmed set of characters.
   // Random selection for all variables: 
   for (var i = 0; i < length; i++) {
       var pickconfirm = confirm[Math.floor(Math.random() * confirm.length)];
+      console.log(pickconfirm);
+      //push random confirmed letters into if/else with a loop and into the password array
       password.push(pickconfirm);
+      console.log(password);
   }
   // This joins the password array and converts it to a string
-  // Worked with a tutor to incorporate this option
   var ps = password.join("");
   UserInput(ps);
   console.log(ps);
